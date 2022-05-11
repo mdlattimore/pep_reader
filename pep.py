@@ -1,4 +1,4 @@
-import requests
+import requests  kk
 from bs4 import BeautifulSoup
 from rich.console import Console
 import argparse
@@ -42,7 +42,7 @@ display_text = get_pep(url)
 
 with console.pager(styles=True):
     console.print(display_text)
-    
+
 print()
 print()
 
