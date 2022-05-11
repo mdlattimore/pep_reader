@@ -1,4 +1,5 @@
-import requests  kk
+# cache
+import requests 
 from bs4 import BeautifulSoup
 from rich.console import Console
 import argparse
