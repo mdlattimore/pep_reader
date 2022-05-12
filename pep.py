@@ -1,3 +1,5 @@
+# TODO provide path to PEP index. It's not on GitHub, so will need to scrape it from peps.python.org
+
 import requests 
 from rich.console import Console
 import argparse
@@ -42,7 +44,7 @@ else:
     response = requests.get(url)
     if response.status_code == 404:
         print("\n" * 2)
-        print("No PEP found. Check the index (PEP 0) for a list of valid PEPS.")
+        print("No PEP found. Check the index at https://peps.python.org/pep-0000 for a list of valid PEPS.")
         print("\n" * 2)
         sys.exit()
     else:
