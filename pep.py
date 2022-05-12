@@ -1,5 +1,4 @@
 import requests 
-from bs4 import BeautifulSoup
 from rich.console import Console
 import argparse
 import sys
@@ -14,19 +13,6 @@ def clear():
         os.system("cls")
     else:
         os.system("clear")
-
-def get_pep(url):
-    url = url
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    try:
-        results = soup.find(id="pep-content")
-        return results.text
-    except AttributeError:
-        print()
-        print("There is no pep with that number.")
-        print()
-        sys.exit()
 
 clear()
 
@@ -45,15 +31,27 @@ path = directory / f"pep_{pep}.txt"
 if path.is_file():
     with open(f"{directory}/pep_{pep}.txt", mode="r") as file:
         display_text = file.read()
-else:
-    url = f"https://peps.python.org/{pep}"
-    display_text = get_pep(url)
-    with open(f"{directory}/pep_{pep}.txt", mode="w") as file:
-        file.write(display_text)
+else:  
+    url = f"https://raw.githubusercontent.com/python/peps/main/pep-{pep}.txt"
+    response = requests.get(url)
+    if response.status_code == 404:
+        print()
+        print()
+        print("No pep found with that number.")
+        print()
+        print()
+        sys.exit()
+    else:
+        display_text = response.text
+        with open(f"{directory}/pep_{pep}.txt", mode="w") as file:
+            file.write(display_text)
+    
 
 with console.pager(styles=True):
     console.print(display_text)
 
 print()
 print()
+print("Bye")
+
 
