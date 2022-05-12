@@ -48,7 +48,7 @@ if path.is_file():
 else:
     url = f"https://raw.githubusercontent.com/python/peps/main/pep-{pep}.txt"
     response = requests.get(url)
-    display_text = response.text
+    display_text = response.content
     with open(f"{directory}/pep_{pep}.txt", mode="w") as file:
         file.write(display_text)
 
