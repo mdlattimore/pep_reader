@@ -1,7 +1,6 @@
-# cache
 import requests 
-from bs4 import BeautifulSoup
-from rich.console import Console
+# from bs4 import BeautifulSoup
+# from rich.console import Console
 import argparse
 import sys
 import os
@@ -47,8 +46,8 @@ if path.is_file():
     with open(f"{directory}/pep_{pep}.txt", mode="r") as file:
         display_text = file.read()
 else:
-    url = f"https://peps.python.org/{pep}"
-    display_text = get_pep(url)
+    url = f"https://raw.githubusercontent.com/python/peps/main/pep-{pep}.txt"
+    display_text = requests.get(url)
     with open(f"{directory}/pep_{pep}.txt", mode="w") as file:
         file.write(display_text)
 
