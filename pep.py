@@ -5,6 +5,8 @@ from rich.console import Console
 import argparse
 import sys
 import os
+from pathlib import Path
+
 
 console = Console()
 
@@ -37,9 +39,16 @@ args = parser.parse_args()
 
 pep = str(args.pep).zfill(4)
 
-url = f"https://peps.python.org/{pep}"
+path = Path(f".peps/{pep}.txt")
 
-display_text = get_pep(url)
+if path.is_file():
+    with open(f".peps/{pep}.txt", mode="r") as file:
+        display_text = file.read()
+else:
+    url = f"https://peps.python.org/{pep}"
+    display_text = get_pep(url)
+    with open(f".peps/{pep}.txt", mode="w") as file:
+        file.write(display_text)
 
 with console.pager(styles=True):
     console.print(display_text)
