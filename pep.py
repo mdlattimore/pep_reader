@@ -2,6 +2,7 @@
 
 import requests 
 from rich.console import Console
+from rich import print as rprint
 import argparse
 import sys
 import os
@@ -44,7 +45,7 @@ else:
     response = requests.get(url)
     if response.status_code == 404:
         print("\n" * 2)
-        print("No PEP found. Check the index at https://peps.python.org/pep-0000 for a list of valid PEPS.")
+        rprint("No PEP found. Check the PEP Index at [link=https://peps.python.org/pep-0000]https://peps.python.org/pep-0000[/link] for a list of valid PEPS (to follow link, CMD-click on Mac, Ctrl-click on Windows).")
         print("\n" * 2)
         sys.exit()
     else:
