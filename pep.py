@@ -1,6 +1,6 @@
 import requests 
 # from bs4 import BeautifulSoup
-# from rich.console import Console
+from rich.console import Console
 import argparse
 import sys
 import os
@@ -47,7 +47,8 @@ if path.is_file():
         display_text = file.read()
 else:
     url = f"https://raw.githubusercontent.com/python/peps/main/pep-{pep}.txt"
-    display_text = requests.get(url)
+    response = requests.get(url)
+    display_text = response.text
     with open(f"{directory}/pep_{pep}.txt", mode="w") as file:
         file.write(display_text)
 
